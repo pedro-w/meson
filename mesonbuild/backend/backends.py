@@ -895,6 +895,8 @@ class Backend:
         includeargs = compiler.get_include_args(pchpath, False)
         p = target.get_pch(compiler.get_language())
         if p:
+            pch_src = os.path.join(self.build_to_src, target.get_source_subdir(), p[0])
+            includeargs += compiler.get_include_args(os.path.dirname(pch_src), False)
             args += compiler.get_pch_use_args(pchpath, p[0])
         return includeargs + args
 
